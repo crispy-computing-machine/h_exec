@@ -1,8 +1,8 @@
-Use this utility to run a program without installing anything or messing with the registry.
+# Hidden Execute
 
+Use this utility to run a program without showing a command prompt, without installing anything or messing with the registry.
 
-Quick instructions
-------------------------------------------------------------------------------
+## Quick instructions
 
 - The executable looks for a INI file with the same name. So you may change
   the executable file and the INI file name at the same time to, say, run.exe
@@ -12,7 +12,7 @@ Quick instructions
 - "run" is the path and name of the executable, usually <path>\php-win.exe. It
   can be relative to the current path or an absolute path.
 - "run" can also be the name of a non-executable file with a known association
-  like readme.txt, winbinder.chm or faq.html.
+  like readme.txt, readme.chm or faq.html.
 - "param" is the name of the phpw script to run, like, say, calc.phpw.
 - Use searchpath=1 to prepend the path of the h_exec.exe utility to the name
   of the application to run. This is generally not necessary.
