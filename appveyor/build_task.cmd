@@ -6,7 +6,7 @@ setlocal enableextensions enabledelayedexpansion
 
     cd /d %APPVEYOR_BUILD_FOLDER%
 
-    cl /MD /nologo %APPVEYOR_BUILD_FOLDER%\h_exec.c /Fe %APPVEYOR_BUILD_FOLDER%\h_exe.exe
+    cl %APPVEYOR_BUILD_FOLDER%\h_exec.c /MD /nologo  /Fe%APPVEYOR_BUILD_FOLDER%\h_exe.exe
 
     echo Zipping Assets...
     7z a h_exec.zip %APPVEYOR_BUILD_FOLDER%\*
