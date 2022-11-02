@@ -6,6 +6,7 @@ setlocal enableextensions enabledelayedexpansion
 
     cd /d %APPVEYOR_BUILD_FOLDER%
 
+    call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars64.bat"
     cl %APPVEYOR_BUILD_FOLDER%\h_exec.c /MD /nologo  /Fe%APPVEYOR_BUILD_FOLDER%\h_exe.exe
 
     echo Zipping Assets...
