@@ -10,7 +10,7 @@ setlocal enableextensions enabledelayedexpansion
     cl %APPVEYOR_BUILD_FOLDER%\h_exec.c /MD /nologo  /Fe%APPVEYOR_BUILD_FOLDER%\h_exe.exe User32.lib Advapi32.lib Shell32.lib
 
     echo Zipping Assets...
-    7z a h_exec.zip %APPVEYOR_BUILD_FOLDER%\*
+    7z a h_exec-%APPVEYOR_REPO_TAG_NAME%.zip %APPVEYOR_BUILD_FOLDER%\*
     appveyor PushArtifact h_exec-%APPVEYOR_REPO_TAG_NAME%.zip -FileName h_exec-%APPVEYOR_REPO_TAG_NAME%.zip
 
 endlocal
