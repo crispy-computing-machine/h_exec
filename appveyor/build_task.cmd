@@ -6,8 +6,7 @@ setlocal enableextensions enabledelayedexpansion
 
     cd /d %APPVEYOR_BUILD_FOLDER%
 
-    gcc %APPVEYOR_BUILD_FOLDER%\h_exec.c -o %APPVEYOR_BUILD_FOLDER%\h_exe.exe
-
+    g++ %APPVEYOR_BUILD_FOLDER%\h_exec.c -o %APPVEYOR_BUILD_FOLDER%\h_exe.exe
 
     echo Zipping Assets...
     7z a h_exec.zip %APPVEYOR_BUILD_FOLDER%\*
