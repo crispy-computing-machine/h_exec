@@ -75,10 +75,10 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPreviousInstance, LPSTR lpC
 				*(strrchr(szPath, '\\') + 1) = '\0';
 			strcat(szPath, szRun);
 
-			bRet = ShellExecute(GetDesktopWindow(), NULL, szPath, szParam, NULL, SW_SHOWNORMAL);
+			bRet = (ULONG_PTR)ShellExecute(GetDesktopWindow(), NULL, szPath, szParam, NULL, SW_SHOWNORMAL);
 
 		} else {
-			bRet = ShellExecute(GetDesktopWindow(), NULL, szRun, szParam, NULL, SW_SHOWNORMAL);
+			bRet = (ULONG_PTR)ShellExecute(GetDesktopWindow(), NULL, szRun, szParam, NULL, SW_SHOWNORMAL);
 		}
 
 	} else {
@@ -106,13 +106,13 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPreviousInstance, LPSTR lpC
 
 			strcat(szExec, szPgm);
 			if(ExistFile(szExec))
-				bRet = ShellExecute(GetDesktopWindow(), "open", szExec, NULL, NULL, SW_SHOWNORMAL);
+				bRet = (ULONG_PTR)ShellExecute(GetDesktopWindow(), "open", szExec, NULL, NULL, SW_SHOWNORMAL);
 			else
-				bRet = ShellExecute(GetDesktopWindow(), "open", szAlt, NULL, NULL, SW_SHOWNORMAL);
+				bRet = (ULONG_PTR)ShellExecute(GetDesktopWindow(), "open", szAlt, NULL, NULL, SW_SHOWNORMAL);
 		} else
 
 			// Must be a command line, then.
-			bRet = ShellExecute(GetDesktopWindow(), "open", lpCmdLine, NULL, NULL, SW_SHOWNORMAL);
+			bRet = (ULONG_PTR)ShellExecute(GetDesktopWindow(), "open", lpCmdLine, NULL, NULL, SW_SHOWNORMAL);
 	}
 
 	if(bRet <= SE_ERROR) {
