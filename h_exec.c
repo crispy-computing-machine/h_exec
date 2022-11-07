@@ -42,9 +42,6 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPreviousInstance, LPSTR lpC
 
     BOOL bSearchPath;
     BOOL bDebug;
-    if(bDebug) {
-        printf("Command Line: %s", sDebug);
-    }
 
     // Is there a command line?
     // No command line: must read from the INI file
@@ -62,6 +59,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPreviousInstance, LPSTR lpC
 		bSearchPath = GetPrivateProfileInt("h_exec", "searchpath", FALSE, szIniFile);
 		bDebug = GetPrivateProfileInt("h_exec", "debug", FALSE, szIniFile);
         if(bDebug) {
+            printf("Command Line: %s", lpCmdLine);
             printf("Run: %s", szRun);
             printf("Param: %s", szParam);
         }
@@ -117,7 +115,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPreviousInstance, LPSTR lpC
 
 	if(bRet <= SE_ERROR) {
 		char sz[MAXSTR];
-		sprintf(sz, "Error # %d", bRet);
+		sprintf(sz, "Error # %s", bRet);
 		MessageBox(NULL, sz, "h_exec", MB_ICONEXCLAMATION);
 	}
 	return bRet;
