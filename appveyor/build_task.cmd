@@ -12,7 +12,7 @@ setlocal enableextensions enabledelayedexpansion
 
     echo Zipping Assets...
     7z a h_exec-%ARCH%.zip %APPVEYOR_BUILD_FOLDER%\h_exe.exe
-    7z a h_exec-%ARCH%.zip %APPVEYOR_BUILD_FOLDER%\README.md
+    7z a h_exec-%ARCH%.zip %APPVEYOR_BUILD_FOLDER%\h_exec.ini
     7z a h_exec-%ARCH%.zip %APPVEYOR_BUILD_FOLDER%\README.md
     appveyor PushArtifact h_exec-%ARCH%.zip -FileName h_exec-%ARCH%.zip
 
