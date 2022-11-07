@@ -115,12 +115,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPreviousInstance, LPSTR lpC
 
 	if(bRet <= SE_ERROR) {
 		char sz[MAXSTR];
-		switch (sizeof(void*)){
-            case 4: sprintf(sz, "Error # %ld", bRet); // 32
-        break;
-            case 8: sprintf(sz, "Error # %lld", bRet); // 64
-        break;
-        }
+		sprintf(sz, "Error # %l", bRet);
 
 		MessageBox(NULL, sz, "h_exec", MB_ICONEXCLAMATION);
 	}
