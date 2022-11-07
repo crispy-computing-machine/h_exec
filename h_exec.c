@@ -34,17 +34,23 @@ static BOOL ExistFile(const char *szFileName);
  */
 int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPreviousInstance, LPSTR lpCmdLine, int nCmdShow)
 {
-	int bRet = (SE_ERROR + 1);
+	ULONG_PTR bRet = (SE_ERROR + 1);
+	char sDebug[MAXSTR] = "";		// Command to run
 	char szRun[MAXSTR] = "";		// Command to run
 	char szParam[MAXSTR] = "";		// Parameters
 	char szIniFile[MAX_PATH];
+
+    BOOL bSearchPath;
+    BOOL bDebug;
+    if(bDebug) {
+        printf("%s", sprintf(sDebug, "Command Line: %s", lpCmdLine));
+    }
 
     // Is there a command line?
     // No command line: must read from the INI file
 	if(!lpCmdLine || !*lpCmdLine) {
 
 		// Build the name of the INI file
-		BOOL bSearchPath;
 		GetModuleFileName(NULL, szIniFile, MAX_PATH);
 		if(strrchr(szIniFile, '.'))
 			*(strrchr(szIniFile, '.') + 1) = '\0';
@@ -54,6 +60,11 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPreviousInstance, LPSTR lpC
 		GetPrivateProfileString("h_exec", "run", "", szRun, MAXSTR, szIniFile);
 		GetPrivateProfileString("h_exec", "param", "", szParam, MAXSTR, szIniFile);
 		bSearchPath = GetPrivateProfileInt("h_exec", "searchpath", FALSE, szIniFile);
+		bDebug = GetPrivateProfileInt("h_exec", "debug", FALSE, szIniFile);
+        if(bDebug) {
+            printf("%s", sprintf(sDebug, "Run: %s", szRun));
+            printf("%s", sprintf(sDebug, "Param: %s", szParam));
+        }
 
 		// Must prepend this path to the application name?
 		if(bSearchPath) {
@@ -64,10 +75,10 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPreviousInstance, LPSTR lpC
 				*(strrchr(szPath, '\\') + 1) = '\0';
 			strcat(szPath, szRun);
 
-			bRet = (int)ShellExecute(GetDesktopWindow(), NULL, szPath, szParam, NULL, SW_SHOWNORMAL);
+			bRet = ShellExecute(GetDesktopWindow(), NULL, szPath, szParam, NULL, SW_SHOWNORMAL);
 
 		} else {
-			bRet = (int)ShellExecute(GetDesktopWindow(), NULL, szRun, szParam, NULL, SW_SHOWNORMAL);
+			bRet = ShellExecute(GetDesktopWindow(), NULL, szRun, szParam, NULL, SW_SHOWNORMAL);
 		}
 
 	} else {
@@ -95,13 +106,13 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPreviousInstance, LPSTR lpC
 
 			strcat(szExec, szPgm);
 			if(ExistFile(szExec))
-				bRet = (int)ShellExecute(GetDesktopWindow(), "open", szExec, NULL, NULL, SW_SHOWNORMAL);
+				bRet = ShellExecute(GetDesktopWindow(), "open", szExec, NULL, NULL, SW_SHOWNORMAL);
 			else
-				bRet = (int)ShellExecute(GetDesktopWindow(), "open", szAlt, NULL, NULL, SW_SHOWNORMAL);
+				bRet = ShellExecute(GetDesktopWindow(), "open", szAlt, NULL, NULL, SW_SHOWNORMAL);
 		} else
 
 			// Must be a command line, then.
-			bRet = (int)ShellExecute(GetDesktopWindow(), "open", lpCmdLine, NULL, NULL, SW_SHOWNORMAL);
+			bRet = ShellExecute(GetDesktopWindow(), "open", lpCmdLine, NULL, NULL, SW_SHOWNORMAL);
 	}
 
 	if(bRet <= SE_ERROR) {
