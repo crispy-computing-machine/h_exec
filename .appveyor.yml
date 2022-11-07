@@ -11,7 +11,7 @@ environment:
 
   matrix:
     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
-      ARCHITECTURES: x64
+      ARCHITECTURES: x86 x64
 
 install:
   - appveyor\install.cmd
