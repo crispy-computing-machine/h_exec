@@ -39,30 +39,29 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPreviousInstance, LPSTR lpC
 	char szRun[MAXSTR] = "";		// Command to run
 	char szParam[MAXSTR] = "";		// Parameters
 	char szIniFile[MAX_PATH];
-
     BOOL bSearchPath;
     BOOL bDebug;
+
+    // Build the name of the INI file
+    GetModuleFileName(NULL, szIniFile, MAX_PATH);
+    if(strrchr(szIniFile, '.'))
+        *(strrchr(szIniFile, '.') + 1) = '\0';
+    strcat(szIniFile, INIPREFIX);
+
+    // Read data from the INI file
+    GetPrivateProfileString("h_exec", "run", "", szRun, MAXSTR, szIniFile);
+    GetPrivateProfileString("h_exec", "param", "", szParam, MAXSTR, szIniFile);
+    bSearchPath = GetPrivateProfileInt("h_exec", "searchpath", FALSE, szIniFile);
+    bDebug = GetPrivateProfileInt("h_exec", "debug", FALSE, szIniFile);
+    if(bDebug) {
+        printf("Command Line: %s", lpCmdLine);
+        printf("Run: %s", szRun);
+        printf("Param: %s", szParam);
+    }
 
     // Is there a command line?
     // No command line: must read from the INI file
 	if(!lpCmdLine || !*lpCmdLine) {
-
-		// Build the name of the INI file
-		GetModuleFileName(NULL, szIniFile, MAX_PATH);
-		if(strrchr(szIniFile, '.'))
-			*(strrchr(szIniFile, '.') + 1) = '\0';
-		strcat(szIniFile, INIPREFIX);
-
-		// Read data from the INI file
-		GetPrivateProfileString("h_exec", "run", "", szRun, MAXSTR, szIniFile);
-		GetPrivateProfileString("h_exec", "param", "", szParam, MAXSTR, szIniFile);
-		bSearchPath = GetPrivateProfileInt("h_exec", "searchpath", FALSE, szIniFile);
-		bDebug = GetPrivateProfileInt("h_exec", "debug", FALSE, szIniFile);
-        if(bDebug) {
-            printf("Command Line: %s", lpCmdLine);
-            printf("Run: %s", szRun);
-            printf("Param: %s", szParam);
-        }
 
 		// Must prepend this path to the application name?
 		if(bSearchPath) {
