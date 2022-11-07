@@ -109,19 +109,16 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPreviousInstance, LPSTR lpC
 
     if(bDebug) {
         char sd[MAXSTR];
-        sprintf(sd, "Command Line: %s\n", lpCmdLine);
-        sprintf(sd, "Run: %s\n", szRun);
-        sprintf(sd, "Param: %s\n", szParam);
+        sprintf(sd, "Command Line: %s\nRun: %s\nParam: %s\n", lpCmdLine, szRun, szParam);
         MessageBox(NULL, sd, "h_exec", MB_ICONINFORMATION);
-
     }
 
 	if(bRet <= SE_ERROR) {
 		char sz[MAXSTR];
 		sprintf(sz, "Error # %l", bRet);
-
 		MessageBox(NULL, sz, "h_exec", MB_ICONEXCLAMATION);
 	}
+
 	return bRet;
 }
 
