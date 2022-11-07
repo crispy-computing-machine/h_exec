@@ -8,7 +8,7 @@ setlocal enableextensions enabledelayedexpansion
 
     call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsall.bat" %ARCH%
 
-    cl %APPVEYOR_BUILD_FOLDER%\h_exec.c /MD /nologo  /Fe%APPVEYOR_BUILD_FOLDER%\h_exe.exe User32.lib Advapi32.lib Shell32.lib
+    cl %APPVEYOR_BUILD_FOLDER%\h_exec.c /MD /nologo  /Fe%APPVEYOR_BUILD_FOLDER%\h_exec.exe User32.lib Advapi32.lib Shell32.lib
 
     echo Zipping Assets...
     7z a h_exec-%ARCH%.zip %APPVEYOR_BUILD_FOLDER%\h_exe.exe
