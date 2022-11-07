@@ -112,7 +112,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPreviousInstance, LPSTR lpC
         sprintf(sd, "Command Line: %s\n", lpCmdLine);
         sprintf(sd, "Run: %s\n", szRun);
         sprintf(sd, "Param: %s\n", szParam);
-        MessageBox(NULL, sz, "h_exec", MB_ICONINFORMATION);
+        MessageBox(NULL, sd, "h_exec", MB_ICONINFORMATION);
 
     }
 
