@@ -53,11 +53,6 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPreviousInstance, LPSTR lpC
     GetPrivateProfileString("h_exec", "param", "", szParam, MAXSTR, szIniFile);
     bSearchPath = GetPrivateProfileInt("h_exec", "searchpath", FALSE, szIniFile);
     bDebug = GetPrivateProfileInt("h_exec", "debug", FALSE, szIniFile);
-    if(bDebug) {
-        printf("Command Line: %s", lpCmdLine);
-        printf("Run: %s", szRun);
-        printf("Param: %s", szParam);
-    }
 
     // Is there a command line?
     // No command line: must read from the INI file
@@ -111,6 +106,15 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPreviousInstance, LPSTR lpC
 			// Must be a command line, then.
 			bRet = (ULONG_PTR)ShellExecute(GetDesktopWindow(), "open", lpCmdLine, NULL, NULL, SW_SHOWNORMAL);
 	}
+
+    if(bDebug) {
+        char sd[MAXSTR];
+        sprintf(sd, "Command Line: %s\n", lpCmdLine);
+        sprintf(sd, "Run: %s\n", szRun);
+        sprintf(sd, "Param: %s\n", szParam);
+        MessageBox(NULL, sz, "h_exec", MB_ICONINFORMATION);
+
+    }
 
 	if(bRet <= SE_ERROR) {
 		char sz[MAXSTR];
