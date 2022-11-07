@@ -43,7 +43,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPreviousInstance, LPSTR lpC
     BOOL bSearchPath;
     BOOL bDebug;
     if(bDebug) {
-        printf("%s", sprintf(sDebug, "Command Line: %s", lpCmdLine));
+        printf("Command Line: %s", sDebug);
     }
 
     // Is there a command line?
@@ -62,8 +62,8 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPreviousInstance, LPSTR lpC
 		bSearchPath = GetPrivateProfileInt("h_exec", "searchpath", FALSE, szIniFile);
 		bDebug = GetPrivateProfileInt("h_exec", "debug", FALSE, szIniFile);
         if(bDebug) {
-            printf("%s", sprintf(sDebug, "Run: %s", szRun));
-            printf("%s", sprintf(sDebug, "Param: %s", szParam));
+            printf("Run: %s", szRun);
+            printf("Param: %s", szParam);
         }
 
 		// Must prepend this path to the application name?
